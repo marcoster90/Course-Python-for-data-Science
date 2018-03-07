@@ -1,0 +1,50 @@
+from sklearn import tree
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+from sklearn.gaussian_process import GaussianProcessClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+import numpy as np
+#More examples in http://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html
+#Data section
+X = [[181,80,44],[177,70,43],[160,60,38], [154,54,37],[166,65,40],[190,90,47],
+     [175,64,39],[177,70,40],[159,55,37],[171,75,42],[181,85,43]]
+
+Y= ['H','M','M','M','H','H','H','M','H','M','H']
+# default initialization 
+clf = tree.DecisionTreeClassifier()
+nbrs = KNeighborsClassifier()
+svm = SVC()
+gpc = GaussianProcessClassifier()
+rfc = RandomForestClassifier()
+
+# Decision Three
+clf = clf.fit(X, Y)
+result_clf = clf.predict(X)
+print (result_clf)
+['H' 'M' 'M' 'M' 'H' 'H' 'H' 'M' 'H' 'M' 'H']
+nbrs.fit(X,Y)
+result_nbrs = nbrs.predict(X)
+print(result_nbrs)
+['M' 'M' 'H' 'H' 'M' 'H' 'M' 'M' 'H' 'M' 'H']
+svm.fit(X,Y)
+result_svm = svm.predict(X)
+print(result_svm)
+['H' 'M' 'M' 'M' 'H' 'H' 'H' 'M' 'H' 'M' 'H']
+gpc.fit(X,Y)
+result_gpc = gpc.predict(X)
+print(result_gpc)
+['H' 'M' 'M' 'M' 'H' 'H' 'H' 'M' 'H' 'M' 'H']
+rfc.fit(X,Y)
+result_rfc = rfc.predict(X)
+print(result_rfc)
+['H' 'M' 'M' 'M' 'H' 'H' 'H' 'M' 'M' 'M' 'H']
+#Check performance
+performance_clf= accuracy_score(Y,result_clf)
+performance_nbrs = accuracy_score(Y,result_nbrs)
+performance_svm = accuracy_score(Y,result_svm)
+performance_gpc = accuracy_score(Y,result_gpc)
+performance_rfc = accuracy_score(Y,result_rfc)
+print("Accuracy: decision tree: {} , neigbhoors: {} , SVC: {}, gaussian: {} , Random forest: {}"
+      .format(performance_clf,performance_nbrs,performance_svm,performance_gpc,performance_rfc))
+Accuracy: decision tree: 1.0 , neigbhoors: 0.5454545454545454 , SVC: 1.0, gaussian: 1.0 , Random forest: 0.9090909090909091
