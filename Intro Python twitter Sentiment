@@ -1,0 +1,26 @@
+import tweepy
+from textblob import TextBlob
+
+#Twitter API keys
+consumer_key= ""
+consumer_secret= ""
+access_token=""
+secret_access_token= ""
+
+#Connecting and consuming using tweepy
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, secret_acces_token)
+api = tweepy.API(auth)
+
+#Reading tweets about Olympic Games and writing it in 
+#a File, the values go from -1 to 1 according the Sentiment status
+
+public_tweets = api.search('Olympic Games')
+f = open("sentiment.txt","w")
+for tweet in public_tweets:
+    f.write(str(tweet.text)+ str(analysis.sentiment) )
+    analysis = TextBlob(tweet.text)
+    print(tweet.text)
+    print(str(analysis.sentiment) + "\n")
+    
+f.close()
